@@ -2,7 +2,6 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import * as appInsights from 'applicationinsights';
 import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 
@@ -12,8 +11,6 @@ async function bootstrap() {
   app.enableCors();
   app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe());
-
-  appInsights.setup(process.env.APPLICATIONINSIGHTS_CONNECTION_STRING).start();
 
   const port = process.env.PORT || 3000;
 
