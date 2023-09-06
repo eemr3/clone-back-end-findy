@@ -9,6 +9,7 @@
     "postinstall": "npx prisma generate --schema=./prisma-mysql/schema.prisma",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "prestart": "npx prisma generate --schema=./prisma-mysql/schema.prisma",
     "start": "node dist/main",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
