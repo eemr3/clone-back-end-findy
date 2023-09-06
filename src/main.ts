@@ -15,7 +15,7 @@ async function bootstrap() {
 
   appInsights.setup(process.env.APPLICATIONINSIGHTS_CONNECTION_STRING).start();
 
-  const PORT = 3000;
+  const port = process.env.PORT || 3000;
 
   const config = new DocumentBuilder()
     .addBearerAuth()
@@ -33,7 +33,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(PORT);
+  await app.listen(port);
 }
 
 bootstrap();
