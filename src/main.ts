@@ -15,7 +15,7 @@ async function bootstrap() {
 
   appInsights.setup(process.env.APPLICATIONINSIGHTS_CONNECTION_STRING).start();
 
-  const PORT = parseInt(process.env.PORT) || 3000;
+  const PORT = 3000;
 
   const config = new DocumentBuilder()
     .addBearerAuth()
@@ -33,10 +33,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(PORT || 3001);
-  if (PORT === 3001) {
-    console.info(`Application is running on: http://localhost:${PORT}`);
-  }
+  await app.listen(PORT);
 }
 
 bootstrap();
