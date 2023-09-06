@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { SurveyProfessionalSituationMySqlRepository } from '../../common/repositories/survey-professional-situation/survey-professional-situation-mysql.repository';
+
 import { SurveyProfessionalSituationSqliteRepository } from '../../common/repositories/survey-professional-situation/survey-professional-situation-sqlite.repository';
 import { SurveyProfessionalSituationRepository } from './repositories/survey-professional-situation.repository';
 import { SurveyProfessionalSituationController } from './survey-professional-situation.controller';
@@ -12,10 +12,7 @@ const modeProduction = process.env.MODE_PRODUCTION;
     SurveyProfessionalSituationService,
     {
       provide: SurveyProfessionalSituationRepository,
-      useClass:
-        modeProduction === 'true'
-          ? SurveyProfessionalSituationMySqlRepository
-          : SurveyProfessionalSituationSqliteRepository,
+      useClass: SurveyProfessionalSituationSqliteRepository,
     },
   ],
 })

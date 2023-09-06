@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { CandidateUserDetailsSerialize } from 'src/common/serializers/candidate-user-details.serialize';
-import { CandidateUserDetailsMySqlRepository } from '../../common/repositories/candidate-user-details/candidate-user-details-mysql.repository';
 import { CandidateUserDetailsSqliteRepository } from '../../common/repositories/candidate-user-details/candidate-user-details-sqlite.repository';
 import { CandidateUserDetailsController } from './candidate-user-details.controller';
 import { CandidateUserDetailsService } from './candidate-user-details.service';
@@ -14,10 +13,7 @@ const modeProduction = process.env.MODE_PRODUCTION;
     CandidateUserDetailsSerialize,
     {
       provide: CandidateUserDetailsRepository,
-      useClass:
-        modeProduction === 'true'
-          ? CandidateUserDetailsMySqlRepository
-          : CandidateUserDetailsSqliteRepository,
+      useClass: CandidateUserDetailsSqliteRepository,
     },
   ],
 })
