@@ -26,7 +26,6 @@ import {
 } from '@nestjs/swagger';
 import { Request, Response } from 'express';
 import { SESSION_COOKIE_KEY } from '../../common/constants/constants';
-import { GoogleOAuthGuard } from './guards/google-oauth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { AuthRequest } from '../../common/interfaces/authentication/auth-request';
 import { RecoverPasswordDto } from '../candidate-user/dto/recover-password.dto';
@@ -62,35 +61,6 @@ export class AuthController {
   })
   async login(@Req() req: AuthRequest) {
     return await this.authService.login(req.user);
-  }
-
-  @ApiExcludeEndpoint()
-  @Get('auth/google')
-  @UseGuards(GoogleOAuthGuard)
-  @ApiOkResponse({
-    description:
-      'Endpoint responsável por realizar login com a conta do Google. O retorno é um token via cookies.',
-    type: SuccessResponse,
-  })
-  async signInWithGoogle() {
-    return;
-  }
-
-  @ApiExcludeEndpoint()
-  @Get('auth/google/redirect')
-  @UseGuards(GoogleOAuthGuard)
-  async googleAuthRedirect(@Req() req: Request, @Res() res: Response) {
-    const token = await this.authService.login(req.user);
-
-    res.cookie(SESSION_COOKIE_KEY, token.access_token, {
-      httpOnly: true,
-      sameSite: 'lax',
-      maxAge: 24 * 60 * 60 * 1000,
-    });
-
-    return res.redirect(
-      this.configService.get<string>('urlRedirectAuthGoogle'),
-    );
   }
 
   @ApiBody({

@@ -12,7 +12,6 @@ import { CandidateUserService } from '../candidate-user/candidate-user.service';
 import { CandidateUserRepository } from '../candidate-user/repositories/candidate-user.repository';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { GoogleStrategy } from './strategies/google.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy.ts';
 
@@ -39,7 +38,6 @@ const modeProduction = process.env.MODE_PRODUCTION;
     CandidateUserSerialize,
     LocalStrategy,
     JwtStrategy,
-    GoogleStrategy,
     MailService,
     {
       provide: CandidateUserRepository,
