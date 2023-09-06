@@ -15,7 +15,7 @@ async function bootstrap() {
 
   appInsights.setup(process.env.APPLICATIONINSIGHTS_CONNECTION_STRING).start();
 
-  const PORT = parseInt(process.env.PORT) || 3001;
+  const PORT = parseInt(process.env.PORT) || 3000;
 
   const config = new DocumentBuilder()
     .addBearerAuth()
